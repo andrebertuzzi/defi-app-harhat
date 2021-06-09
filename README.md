@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## runs node
+npx hardhat node
+
+## compile contracts
+npx hardhat compile
+
+## deploy contract in the node
+npx hardhat run scripts/deploy.js --network localhost

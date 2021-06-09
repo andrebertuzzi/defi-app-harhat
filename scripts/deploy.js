@@ -5,6 +5,11 @@
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
 
+
+const tokens = (n) => {
+	return ethers.utils.parseEther(n).toString()
+}
+
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
   // line interface.
@@ -14,6 +19,7 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
+  [owner, investor] = await ethers.getSigners();
   const DaiToken = await hre.ethers.getContractFactory("DaiToken");
   const daiToken = await DaiToken.deploy();
 
@@ -30,6 +36,12 @@ async function main() {
   console.log("Dai deployed to:", daiToken.address);
   console.log("Dapp deployed to:", dappToken.address);
   console.log("TokenFarming deployed to:", tokenFarm.address);
+
+  // Transfer all Dapp tokens to farm (1 million)
+  await dappToken.transfer(tokenFarm.address, tokens('1000000'))
+
+  // Send tokens to investor
+  await daiToken.transfer(investor.address, tokens('100'))
 }
 
 // We recommend this pattern to be able to use async/await everywhere
