@@ -1,15 +1,15 @@
 pragma solidity ^0.8.4;
 
-import "./DappToken.sol";
+import "./DecoToken.sol";
 import "./DaiToken.sol";
 
 import "hardhat/console.sol";
 
 contract TokenFarm {
-    string public name = "Dapp Token Farm";
+    string public name = "Deco Token Farm";
     uint public constant duration = 5 minutes;
     address public owner;
-    DappToken public dappToken;
+    DecoToken public decoToken;
     DaiToken public daiToken;
 
     address[] public stakers;
@@ -19,8 +19,8 @@ contract TokenFarm {
     mapping(address => uint) public end;
 
 
-    constructor(DappToken _dappToken, DaiToken _daiToken) public {
-        dappToken = _dappToken;
+    constructor(DecoToken _decoToken, DaiToken _daiToken) public {
+        decoToken = _decoToken;
         daiToken = _daiToken;
         owner = msg.sender;
     }
@@ -28,6 +28,7 @@ contract TokenFarm {
     function stakeTokens(uint _amount) public {
         // Require amount greater than 0
         require(_amount > 0, "amount cannot be 0");
+
 
         // Trasnfer Mock Dai tokens to this contract for staking
         daiToken.transferFrom(msg.sender, address(this), _amount);
@@ -78,7 +79,7 @@ contract TokenFarm {
             address recipient = stakers[i];
             uint balance = stakingBalance[recipient];
             if(balance > 0) {
-                dappToken.transfer(recipient, balance);
+                decoToken.transfer(recipient, balance);
             }
         }
     }

@@ -5,11 +5,11 @@ import Main from './Main'
 import './App.css'
 
 import DaiToken from '../artifacts/contracts/DaiToken.sol/DaiToken.json'
-import DappToken from '../artifacts/contracts/DappToken.sol/DappToken.json'
+import DecoToken from '../artifacts/contracts/DecoToken.sol/DecoToken.json'
 import TokenFarm from '../artifacts/contracts/TokenFarm.sol/TokenFarm.json'
 
 const daiTokenAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
-const dappTokenAddress = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+const decoTokenAddress = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
 const tokenFarmAddress = '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0'
 
 class App extends Component {
@@ -45,19 +45,19 @@ class App extends Component {
 			window.alert('DaiToken contract not deployed to detected network.')
 		}
 
-		// // Load DappToken
-		const dappToken = new ethers.Contract(
-			dappTokenAddress,
-			DappToken.abi,
+		// // Load DecoToken
+		const decoToken = new ethers.Contract(
+			decoTokenAddress,
+			DecoToken.abi,
 			provider
 		)
-		if (dappToken) {
-			this.setState({ dappToken })
-			const balance = await dappToken.balanceOf(account)
-			console.log(`Dapp Balance ${this.state.account}`, balance.toString())
-			this.setState({ dappTokenBalance: balance.toString() })
+		if (decoToken) {
+			this.setState({ decoToken })
+			const balance = await decoToken.balanceOf(account)
+			console.log(`Deco Balance ${this.state.account}`, balance.toString())
+			this.setState({ decoTokenBalance: balance.toString() })
 		} else {
-			window.alert('DappToken contract not deployed to detected network.')
+			window.alert('DecoToken contract not deployed to detected network.')
 		}
 
 		// // Load TokenFarm
@@ -74,7 +74,7 @@ class App extends Component {
 			this.setState({ stakingBalance: stakingBalance.toString() })
 			console.log(`Staking Balance ${this.state.account}`, stakingBalance.toString())
 		} else {
-			window.alert('DappToken contract not deployed to detected network.')
+			window.alert('DecoToken contract not deployed to detected network.')
 		}
 
 		this.setState({ loading: false })
@@ -121,10 +121,10 @@ class App extends Component {
 		this.state = {
 			account: '0x0',
 			daiToken: {},
-			dappToken: {},
+			decoToken: {},
 			tokenFarm: {},
 			daiTokenBalance: '0',
-			dappTokenBalance: '0',
+			decoTokenBalance: '0',
 			stakingBalance: '0',
 			loading: true,
 		}
@@ -142,7 +142,7 @@ class App extends Component {
 			content = (
 				<Main
 					daiTokenBalance={this.state.daiTokenBalance}
-					dappTokenBalance={this.state.dappTokenBalance}
+					decoTokenBalance={this.state.decoTokenBalance}
 					stakingBalance={this.state.stakingBalance}
 					stakeTokens={this.stakeTokens}
 					unstakeTokens={this.unstakeTokens}
@@ -161,12 +161,6 @@ class App extends Component {
 							style={{ maxWidth: '600px' }}
 						>
 							<div className='content mr-auto ml-auto'>
-								<a
-									href='http://www.dappuniversity.com/bootcamp'
-									target='_blank'
-									rel='noopener noreferrer'
-								></a>
-
 								{content}
 							</div>
 						</main>

@@ -18,7 +18,7 @@ class Main extends Component {
           <tbody>
             <tr>
               <td>{ethers.utils.formatEther(this.props.stakingBalance).toString()} mDAI</td>
-              <td>{ethers.utils.formatEther(this.props.dappTokenBalance).toString()} DAPP</td>
+              <td>{ethers.utils.formatEther(this.props.decoTokenBalance).toString()} DECO</td>
             </tr>
           </tbody>
         </table>
