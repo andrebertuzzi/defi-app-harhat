@@ -27,7 +27,7 @@ module.exports = {
     },
     matic: {
       url: "https://rpc-mainnet.matic.network",
-      accounts: ['df3540bd6a4da30f4226feb495f43b60aeab893fbb331c3475b6b9e9051fbd3a']
+      accounts: process.os.PRIVATE_KEY
     }
   }
 };

@@ -19,7 +19,7 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  [owner, investor] = await ethers.getSigners();
+  [owner] = await ethers.getSigners();
   const DaiToken = await hre.ethers.getContractFactory("DaiToken");
   const daiToken = await DaiToken.deploy();
 
@@ -41,7 +41,7 @@ async function main() {
   await decoToken.transfer(tokenFarm.address, tokens('1000000'))
 
   // Send tokens to investor
-  await daiToken.transfer(investor.address, tokens('100'))
+  await daiToken.transfer(owner.address, tokens('100'))
 }
 
 // We recommend this pattern to be able to use async/await everywhere
